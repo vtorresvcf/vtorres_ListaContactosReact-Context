@@ -1,43 +1,62 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import Contact from "../component/Contact";
+import { AiOutlineEdit, AiFillAlert } from "react-icons/ai";
+import { RiDeleteBin2Fill } from "react-icons/ri";
 
 import "../../styles/demo.css";
 
 export const Demo = () => {
-	const { store, actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
+  return (
+    <div className="container ">
+      <div className="d-flex justify-content-end">
+        <button
+          onClick={() => navigate("/FormularioContact")}
+          className="btn btn-success "
+        >
+          Añadir nuevo contacto
+        </button>
+      </div>
 
-	return (
-		<div className="container">
-			<ul className="list-group">
-				{store.demo.map((item, index) => {
-					return (
-						<li
-							key={index}
-							className="list-group-item d-flex justify-content-between"
-							style={{ background: item.background }}>
-							<Link to={"/single/" + index}>
-								<span>Link to: {item.title}</span>
-							</Link>
-							{// Conditional render example
-							// Check to see if the background is orange, if so, display the message
-							item.background === "orange" ? (
-								<p style={{ color: item.initial }}>
-									Check store/flux.js scroll to the actions to see the code
-								</p>
-							) : null}
-							<button className="btn btn-success" onClick={() => actions.changeColor(index, "orange")}>
-								Change Color
-							</button>
-						</li>
-					);
-				})}
-			</ul>
-			<br />
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
-		</div>
-	);
+      <ul className="list-group">
+        {store.contacts.length > 0 ? (
+          <>
+            {store.contacts.map((item, index) => (
+              <li
+                key={index}
+                className="list-group-item d-flex justify-content-between"
+              >
+                <button
+                  className="btn btn-dark"
+                  onClick={() => navigate("/single/" + index)}
+                >
+                  Ver info del contacto
+                </button>
+
+                <Contact item={item} />
+
+                <AiOutlineEdit onClick={() => console.log("Editando..")} />
+                <RiDeleteBin2Fill
+                  onClick={() => actions.deleteContact(index)}
+                />
+              </li>
+            ))}
+          </>
+        ) : (
+          <div className="d-flex justify-content-around  m-5 border border-danger rounded py-3 ">
+            <h1>
+              <AiFillAlert /> No tienes contactos...
+            </h1>
+          </div>
+        )}
+      </ul>
+      <br />
+      <Link to="/">
+        <button className="btn btn-primary">Volver a Inicio</button>
+      </Link>
+    </div>
+  );
 };

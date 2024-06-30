@@ -3,24 +3,29 @@ import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Single = props => {
-	const { store, actions } = useContext(Context);
-	const params = useParams();
-	return (
-		<div className="jumbotron">
-			<h1 className="display-4">This will show the demo element: {store.demo[params.theid].title}</h1>
+export const Single = (props) => {
+  const { store, actions } = useContext(Context);
+  const params = useParams();
+  return (
+    <div className="jumbotron border w-50 mx-auto p-4 ">
+      <h1 className="display-4 my-3 text-center">Datos del contacto</h1>
+      <hr className="my-4" />
+      <p>Nombre y apellidos: {store.contacts[params.theid].fullname}</p>
+      <p>Teléfono: {store.contacts[params.theid].phone}</p>
+      <p>Email: {store.contacts[params.theid].email}</p>
+      <p>Dirección: {store.contacts[params.theid].address}</p>
 
-			<hr className="my-4" />
+      <hr className="my-4" />
 
-			<Link to="/">
-				<span className="btn btn-primary btn-lg" href="#" role="button">
-					Back home
-				</span>
-			</Link>
-		</div>
-	);
+      <Link to="/demo">
+        <span className="btn btn-dark w-100 " href="#" role="button">
+          Volver a la lista de contactos
+        </span>
+      </Link>
+    </div>
+  );
 };
 
 Single.propTypes = {
-	match: PropTypes.object
+  match: PropTypes.object,
 };
