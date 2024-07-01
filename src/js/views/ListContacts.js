@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Contact from "../component/Contact";
 import { AiOutlineEdit, AiFillAlert } from "react-icons/ai";
@@ -7,7 +7,7 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 
 import "../../styles/demo.css";
 
-export const Demo = () => {
+export const ListContacts = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ export const Demo = () => {
                 <div className="align-items-center d-flex justify-content-around">
                   <button
                     className="btn btn-dark w-75"
-                    onClick={() => navigate("/single/" + index)}
+                    onClick={() => navigate("/contactcard/" + index)}
                   >
                     Ver info del contacto
                   </button>
@@ -106,13 +106,10 @@ export const Demo = () => {
       <div className="d-flex justify-content-center  gap-3">
         <button
           onClick={() => navigate("/FormularioContact")}
-          className="btn btn-success "
+          className="btn btn-success w-50 "
         >
           Añadir nuevo contacto
         </button>
-        <Link to="/">
-          <button className="btn btn-primary">Volver a Inicio</button>
-        </Link>
       </div>
     </div>
   );

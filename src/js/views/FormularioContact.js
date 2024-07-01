@@ -115,7 +115,7 @@ const FormularioContact = () => {
           Guardar
         </button>
 
-        <Link to="/demo">
+        <Link to="/listcontacts">
           <button className="btn btn-success mt-3">
             Volver al listado de contactos
           </button>

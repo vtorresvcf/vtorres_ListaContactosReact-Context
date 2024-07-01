@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Single = (props) => {
+export const ContactCard = () => {
   const { store } = useContext(Context);
   const params = useParams();
   return (
@@ -17,7 +17,7 @@ export const Single = (props) => {
 
       <hr className="my-4" />
 
-      <Link to="/demo">
+      <Link to="/listcontacts">
         <span className="btn btn-dark w-100 " href="#" role="button">
           Volver a la lista de contactos
         </span>
@@ -26,6 +26,6 @@ export const Single = (props) => {
   );
 };
 
-Single.propTypes = {
+ContactCard.propTypes = {
   match: PropTypes.object,
 };
