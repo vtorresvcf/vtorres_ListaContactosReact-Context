@@ -3,15 +3,16 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import BotonInfo from "../component/BotonInfo";
 
-const FormularioContact = () => {
-  const { actions } = useContext(Context);
+const EditFormulario = () => {
+  const { actions, store } = useContext(Context);
   const [error, setError] = useState(false);
   const [confirmacionEnvio, setConfirmacionEnvio] = useState(false);
+
   const [newContact, setNewContact] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
+    name: store.edit?.name,
+    email: store.edit?.email,
+    phone: store.edit?.address,
+    address: store.edit?.phone,
   });
   const handleChange = (e) => {
     setNewContact({ ...newContact, [e.target.name]: e.target.value });
@@ -32,7 +33,7 @@ const FormularioContact = () => {
       return;
     } else {
       setError(false);
-      actions.addContact(newContact);
+      actions.editContact(newContact, store.edit?.id);
       setConfirmacionEnvio(true);
       setNewContact({ name: "", email: "", phone: "", address: "" });
     }
@@ -42,7 +43,7 @@ const FormularioContact = () => {
     <div>
       <form onSubmit={handleSubmit} className="w-50 mx-auto">
         <h1 className="text-center pb-3">
-          Agregar nuevo contacto <hr />
+          Modificar contacto <hr />
         </h1>
 
         {error && (
@@ -52,7 +53,7 @@ const FormularioContact = () => {
           />
         )}
         {confirmacionEnvio && (
-          <BotonInfo clase="btn-success" texto="Agregado correctamente" />
+          <BotonInfo clase="btn-success" texto="Modificado correctamente" />
         )}
 
         <div className="mb-3">
@@ -112,7 +113,7 @@ const FormularioContact = () => {
           />
         </div>
         <button type="submit" className="btn btn-primary w-100 ">
-          Guardar
+          Modificar
         </button>
 
         <Link to="/demo">
@@ -124,5 +125,4 @@ const FormularioContact = () => {
     </div>
   );
 };
-
-export default FormularioContact;
+export default EditFormulario;

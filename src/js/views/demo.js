@@ -10,38 +10,84 @@ import "../../styles/demo.css";
 export const Demo = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
-  return (
-    <div className="container ">
-      <div className="d-flex justify-content-end">
-        <button
-          onClick={() => navigate("/FormularioContact")}
-          className="btn btn-success "
-        >
-          Añadir nuevo contacto
-        </button>
-      </div>
 
-      <ul className="list-group">
-        {store.contacts.length > 0 ? (
+  const handleEdit = (id) => {
+    actions.filterContactEdit(id);
+    navigate("/editformulario");
+  };
+
+  return (
+    <div className="container  ">
+      <ul className="list-group my-2 w-50 mx-auto">
+        {store.contacts ? (
           <>
             {store.contacts.map((item, index) => (
-              <li
-                key={index}
-                className="list-group-item d-flex justify-content-between"
-              >
-                <button
-                  className="btn btn-dark"
-                  onClick={() => navigate("/single/" + index)}
-                >
-                  Ver info del contacto
-                </button>
+              <li key={index} className="list-group-item">
+                <div className="align-items-center d-flex justify-content-around">
+                  <button
+                    className="btn btn-dark w-75"
+                    onClick={() => navigate("/single/" + index)}
+                  >
+                    Ver info del contacto
+                  </button>
+                  <div className=" w-25 d-flex justify-content-around">
+                    <AiOutlineEdit //Icono edit
+                      onClick={() => handleEdit(item.id)}
+                    />
+
+                    <RiDeleteBin2Fill //Icono delete
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    />
+                  </div>
+                </div>
 
                 <Contact item={item} />
 
-                <AiOutlineEdit onClick={() => console.log("Editando..")} />
-                <RiDeleteBin2Fill
-                  onClick={() => actions.deleteContact(index)}
-                />
+                <div
+                  // Modal confirmación delete usuario
+                  className="modal fade"
+                  id="exampleModal"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h1 className="modal-title fs-5" id="exampleModalLabel">
+                          Confirmar eliminación del contacto
+                        </h1>
+                        <button
+                          type="button"
+                          className="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div className="modal-body">
+                        Estás seguro que quieres eliminar el contacto?
+                      </div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          No, volver
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          data-bs-dismiss="modal"
+                          onClick={() => actions.deleteContact(item.id)}
+                        >
+                          Sí, eliminar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </li>
             ))}
           </>
@@ -54,9 +100,17 @@ export const Demo = () => {
         )}
       </ul>
       <br />
-      <Link to="/">
-        <button className="btn btn-primary">Volver a Inicio</button>
-      </Link>
+      <div className="d-flex justify-content-center  gap-3">
+        <button
+          onClick={() => navigate("/FormularioContact")}
+          className="btn btn-success "
+        >
+          Añadir nuevo contacto
+        </button>
+        <Link to="/">
+          <button className="btn btn-primary">Volver a Inicio</button>
+        </Link>
+      </div>
     </div>
   );
 };

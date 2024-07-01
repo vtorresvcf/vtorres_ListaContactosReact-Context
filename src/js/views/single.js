@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Single = (props) => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
   const params = useParams();
   return (
     <div className="jumbotron border w-50 mx-auto p-4 ">

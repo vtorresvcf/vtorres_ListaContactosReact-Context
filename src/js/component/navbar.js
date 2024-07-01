@@ -5,19 +5,19 @@ import { LuGithub } from "react-icons/lu";
 export const Navbar = () => {
   return (
     <nav className="navbar navbar-dark bg-dark mb-3 ">
-      <div class="container-fluid">
-        <p class="navbar-brand"></p>
+      <div className="container-fluid">
+        <p className="navbar-brand"></p>
         <a href="" className="nav-brand"></a>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
+        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <li className="nav-item">
+            <a className="nav-link active" aria-current="page" href="#">
               Project Contact List App Using React & Context
             </a>
           </li>
         </ul>
-        <span class="navbar-text text-white">Ir al repositorio</span>
+        <span className="navbar-text text-white">Ir al repositorio</span>
         <a
-          class="nav-link text-white"
+          className="nav-link text-white"
           aria-current="page"
           href="https://github.com/vtorresvcf/vtorres_ListaContactosReact-Context.git"
         >
