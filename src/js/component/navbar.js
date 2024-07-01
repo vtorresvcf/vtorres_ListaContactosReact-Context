@@ -15,13 +15,15 @@ export const Navbar = () => {
             </a>
           </li>
         </ul>
-        <span className="navbar-text text-white">Ir al repositorio</span>
+        <span className="navbar-text text-white">Ver repositorio en </span>
         <a
           className="nav-link text-white"
           aria-current="page"
           href="https://github.com/vtorresvcf/vtorres_ListaContactosReact-Context.git"
         >
-          <LuGithub />
+          <div className="border border-white rounded-circle p-1">
+            <LuGithub />
+          </div>
         </a>
       </div>
     </nav>

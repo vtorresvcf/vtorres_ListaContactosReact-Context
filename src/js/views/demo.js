@@ -18,8 +18,11 @@ export const Demo = () => {
 
   return (
     <div className="container  ">
+      <h1 className="text-center pb-3">
+        Lista de contactos <hr />
+      </h1>
       <ul className="list-group my-2 w-50 mx-auto">
-        {store.contacts ? (
+        {store.contacts.length ? (
           <>
             {store.contacts.map((item, index) => (
               <li key={index} className="list-group-item">
@@ -92,7 +95,7 @@ export const Demo = () => {
             ))}
           </>
         ) : (
-          <div className="d-flex justify-content-around  m-5 border border-danger rounded py-3 ">
+          <div className="mx-auto d-flex justify-content-around  m-5 border border-danger rounded py-3 ">
             <h1>
               <AiFillAlert /> No tienes contactos...
             </h1>
